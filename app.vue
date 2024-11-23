@@ -35,8 +35,10 @@ import { useHead } from '#imports';
 useHead({
   title: 'Twitter clone',
   meta: [
-    { name: 'description', content: 'By monoblade' },
-    { name: 'keywords', content: 'Twitter, clone, monoblade' }
+    { name: 'description', content: 'Twitter clone made by Ivan Kondrich' },
+    { name: 'keywords', content: 'Twitter, clone, monoblade' },
+    { name: "viewport", content: "width=device-width, initial-scale=1.0" },
+    { name: "author", content: "Monoblade" },
   ]
 })
 
