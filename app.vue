@@ -2,18 +2,20 @@
   <div :class="{ dark: darkMode }">
     <div class="bg-white dark:bg-gray-900">
       <div class="min-h-full">
-        <div class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:gap-5">
+        <div
+          class="grid grid-cols-12 mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:gap-5"
+        >
           <!-- Left sidebar -->
 
-          <div class="hidden md:block xs-col-span-2">
+          <div class="hidden md:block xs-col-span-1 xl:col-span-2">
             <div class="sticky top-0">
               <SidebarLeft />
             </div>
           </div>
 
           <!-- Main content -->
-          <main class="col-span-12 md:col-span-8 xl:col-span-6">
-            <!-- <h1>123</h1> -->
+          <main class="col-span-12 marker:md:col-span-8 xl:col-span-6">
+            <router-view />
           </main>
 
           <!-- Right sidebar -->
@@ -29,18 +31,18 @@
   </div>
 </template>
 <script setup>
-import { HomeIcon } from '@heroicons/vue/solid';
-import { useHead } from '#imports';
+import { HomeIcon } from "@heroicons/vue/solid";
+import { useHead } from "#imports";
 
 useHead({
-  title: 'Twitter clone',
+  title: "Twitter clone",
   meta: [
-    { name: 'description', content: 'Twitter clone made by Ivan Kondrich' },
-    { name: 'keywords', content: 'Twitter, clone, monoblade' },
+    { name: "description", content: "Twitter clone made by Ivan Kondrich" },
+    { name: "keywords", content: "Twitter, clone, monoblade" },
     { name: "viewport", content: "width=device-width, initial-scale=1.0" },
     { name: "author", content: "Monoblade" },
-  ]
-})
+  ],
+});
 
-const darkMode = ref(false);
+const darkMode = ref(true);
 </script>
