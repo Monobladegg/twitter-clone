@@ -1,10 +1,12 @@
-export const getUserByUsernameOrEmail = (email, username) => {
-  const finalUserData = {
-    ...userData,
-    password: bcrypt.hashSync(userData.password, 10),
-  };
+import { prisma } from "../..";
 
-  return prisma.user.create({
-    data: finalUserData,
+export const getUserByUsernameOrEmail = (email, username) => {
+  return prisma.user.findFirst({
+    where: {
+      OR: [
+        { username: username },
+        { email: email }
+      ]
+    },
   });
 };

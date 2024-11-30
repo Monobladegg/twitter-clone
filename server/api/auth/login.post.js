@@ -1,3 +1,6 @@
+import { getUserByUsernameOrEmail } from "~/server/db/users/getUserByUsernameOrEmail";
+import bcrypt from "bcrypt";
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
@@ -10,7 +13,7 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  const user = getUserByUsernameOrEmail(email, username);
+  const user = await getUserByUsernameOrEmail(email, username);
 
   if (!user) {
     return sendError(
@@ -19,10 +22,21 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  if (!bcrypt.compareSync(password, user.password)) {
+  const passwordisValid = bcrypt.compareSync(password, user.password);
+
+  if (!passwordisValid) {
     return sendError(
       event,
-      createError({ statusCode: 400, statusMessage: "Invalid credentials" })
+      createError({ statusCode: 400, statusMessage: "Password incorrect" })
     );
   }
+
+  // Generate Tokens
+
+  // Access Token
+
+  // Refresh Token
+  const {accessToken, refreshToken} = generateTokens(user.id)
+
+  return { user, passwordisValid, accessToken, refreshToken };
 });
